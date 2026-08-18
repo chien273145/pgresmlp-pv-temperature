@@ -1,5 +1,7 @@
 # PG-ResMLP — Physics-guided TinyML virtual sensing of PV module temperature
 
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.21990310.svg)](https://doi.org/10.5281/zenodo.21990310)
+
 Code, data, and results for the paper:
 
 > **Physics-guided TinyML virtual sensing of photovoltaic module temperature across climates, sampling resolutions, and data regimes**
