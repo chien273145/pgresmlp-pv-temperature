@@ -1,0 +1,38 @@
+
+VIETNAM FIELD VALIDATION — CROSS-CONTINENT TRANSFER
+Generated: 2026-04-20 14:27:34
+=================================================================
+
+SETUP
+  Source pretrain: PVDAQ 7333 (California, USA) — loaded from c:\Users\admin\NCKH\models\mlp_4f_best.keras
+  Target fine-tune: Hanoi, Vietnam — 449 samples ([datetime.date(2026, 4, 16), datetime.date(2026, 4, 17), datetime.date(2026, 4, 18), datetime.date(2026, 4, 19)])
+  Target test: 218 samples (daytime GHI > 20 W/m²) — [datetime.date(2026, 4, 20)]
+  Features: ['T_Faiman_vn', 'T_ambient', 'WS', 'GHI_lag']
+  n_seeds: 5 ([0, 1, 2, 3, 4])
+
+RESULTS
+  Model                                        MAE (°C)       R²
+  --------------------------------------------------------------
+  Faiman US (zero-shot, default coefficients)        0.541       —
+  Faiman VN (U0=32.6, U1=2.48)                    0.562    0.754
+  Linear Regression (3-day fine-tune)             0.444       —
+  PG-ResMLP (pretrain+finetune)                0.296±0.003    0.921
+
+PER-SEED BREAKDOWN
+    Seed      MAE     RMSE       R²   Epochs
+       0    0.298    0.475    0.919      112
+       1    0.301    0.479    0.918      118
+       2    0.294    0.468    0.922      110
+       3    0.296    0.472    0.920      106
+       4    0.291    0.463    0.923      110
+
+WIND DATA
+  Source: NASA POWER WS2M (hourly, 0.5° grid)
+  Impact: see above
+
+INTERPRETATION FOR PAPER
+  - Cross-continent (US→Vietnam) transfer works
+  - PG-ResMLP improvement over Faiman VN: +0.266°C (+47.4%)
+  - This constitutes first published field validation of PG-ResMLP on Vietnamese PV data
+  - Limitation: 218 daytime test samples (1 day) — preliminary validation only
+  - Future: multi-season data, calibrated sensors, onsite anemometer

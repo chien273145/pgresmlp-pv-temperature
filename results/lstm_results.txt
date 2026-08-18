@@ -1,0 +1,46 @@
+LSTM WORKSHOP PAPER — RESULTS
+==========================================================================
+
+Best LSTM: LSTM(64)-D(32), window=6 (30 min)
+Train: 2022 (49481), Test: 2023 (43096)
+Features (10): ['T_Faiman', 'T_ambient_mean', 'Wind_speed_mean', 'GHI_lag_30min', 'POA_diff', 'GHI_diff', 'Hour_sin', 'Hour_cos', 'DoY_sin', 'DoY_cos']
+
+--- Architecture Search (seed=42) ---
+Arch                      Window     MAE    RMSE      R2     Params     Time
+--------------------------------------------------------------------------
+LSTM(64)-D(32)                 6   1.379   1.867  0.9830     21,313    83.6s
+LSTM(64)-LSTM(32)              6   1.382   1.880  0.9827     31,649    73.1s
+LSTM(32)-D(16)                 6   1.417   1.895  0.9825      6,049    74.2s
+LSTM(64)-D(32)                12   1.488   1.979  0.9809     21,313   114.7s
+LSTM(64)-LSTM(32)             12   1.499   2.033  0.9798     31,649   152.2s
+LSTM(32)-D(16)                12   1.440   1.949  0.9814      6,049   114.1s
+LSTM(64)-D(32)                24   1.485   1.981  0.9808     21,313   207.3s
+LSTM(64)-LSTM(32)             24   1.508   2.033  0.9798     31,649   260.6s
+LSTM(32)-D(16)                24   1.489   2.003  0.9804      6,049   117.4s
+
+--- 5-Seed Evaluation (Best Config) ---
+  Seed     MAE    RMSE      R2
+----------------------------------------
+    42   1.473   1.956  0.9813
+   123   1.505   1.981  0.9808
+   456   1.367   1.850  0.9833
+   789   1.492   1.969  0.9811
+  1024   1.449   1.932  0.9818
+  Mean   1.457   1.937  0.9817
+   Std   0.049   0.047  0.0009
+
+--- Comparison with Baselines ---
+Model                         MAE    RMSE      R2
+--------------------------------------------------
+Faiman                      2.517   3.120  0.9525
+LinearReg                   1.534   1.982  0.9808
+RF                          1.419   1.865  0.9830
+MLP(64,32)                  1.351   1.764  0.9848
+CNN                         1.680   2.220  0.9759
+LSTM (5-seed mean)          1.457   1.937  0.9817
+
+KEY FINDINGS:
+  LSTM vs Faiman improvement: 42.1%
+  LSTM vs MLP:    1.457 vs 1.351 (worse)
+  LSTM vs RF:     1.457 vs 1.419 (worse)
+  LSTM vs CNN:    1.457 vs 1.680 (better)

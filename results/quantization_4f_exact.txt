@@ -1,0 +1,12 @@
+4-FEATURE QUANTIZATION — EXACT NUMBERS
+============================================================
+
+Model                     MAE     RMSE       R2  Size(B)     KB       ms
+------------------------------------------------------------
+MLP-4f-F32             1.3227   1.7588 0.984905        —      —        —
+MLP-4f-Dynamic         1.3200   1.7560 0.984954     5880    5.7   0.0011
+MLP-4f-INT8            1.3419   1.7755 0.984618     7552    7.4   0.0012
+
+Dynamic degrad: -0.0027 C
+INT8 degrad:    +0.0191 C
+Size ratio vs 10f: Dynamic 0.8x, INT8 1.0x

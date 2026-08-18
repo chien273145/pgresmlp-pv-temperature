@@ -1,0 +1,26 @@
+PHASE 1 DEFINITIVE RESULTS — Keras(64,32)
+==========================================================================
+
+Architecture: Dense(64) → Dense(32) → Dense(1), ~2,753 params
+Train: 2022 (49481), Test: 2023 (43096)
+Features: ['T_Faiman', 'T_ambient_mean', 'Wind_speed_mean', 'GHI_lag_30min', 'POA_diff', 'GHI_diff', 'Hour_sin', 'Hour_cos', 'DoY_sin', 'DoY_cos']
+
+Model                Mode           MAE    RMSE      R2      KB      ms
+--------------------------------------------------------------------------
+Faiman               Physics      2.517   3.120  0.9525       0  <0.001
+LinearReg            Direct       1.534   1.982  0.9808     0.1  <0.001
+RF                   Direct       1.419   1.865  0.9830    ~200  server
+MLP-F32              Direct       1.396   1.824  0.9838       -       -
+MLP-Dynamic          Direct       1.399   1.827  0.9837     7.2   0.001
+MLP-INT8             Direct       1.417   1.850  0.9833     7.8   0.001
+MLP-Residual         Residual     1.553   2.008  0.9803       -       -
+MLP-CrossStation     Direct       2.186   2.877  0.9576       -       -
+MLP-SameStation      Direct       7.497   9.977  0.4838       -       -
+CNN-F32              Direct       4.214   5.601  0.8468      66       -
+
+KEY METRICS:
+  Faiman → MLP improvement: 44.5%
+  INT8 degradation: 0.021°C
+  Direct vs Residual: 1.396 vs 1.553
+  MLP+lag vs CNN+raw: 1.396 vs 4.214
+  Cross-station: 2.186, Same-station: 7.497, Gap: -5.311°C

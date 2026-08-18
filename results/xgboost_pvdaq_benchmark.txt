@@ -1,0 +1,8 @@
+XGBoost PVDAQ 7333 Benchmark
+================================
+Seeds: [0, 1, 2, 3, 4]
+Individual MAEs: [1.3778, 1.3728, 1.3787, 1.3753, 1.3747]
+Mean MAE: 1.3759°C
+Std MAE:  0.0022°C
+Leaves:   ~17426
+Faiman:   2.5171°C

@@ -1,0 +1,13 @@
+ESP32 ON-DEVICE VALIDATION
+============================================================
+
+Model: MLP[4->32->16->1] Float32, 2820 bytes
+Board: ESP32-DevKitC, 240MHz
+Test:  500 rows from PVDAQ 7333 (2023)
+
+MAE:      1.3114 C
+RMSE:     1.7876 C
+R2:       0.985717
+Latency:  31 us (mean), 31 us (p95)
+Heap:     350044 bytes free
+Model:    2820 bytes

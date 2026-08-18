@@ -1,0 +1,50 @@
+4-FEATURE vs 10-FEATURE COMPARISON
+======================================================================
+
+TASK 1: Feature set verification
+  FEATURES_4 = ['T_Faiman', 'T_ambient_mean', 'Wind_speed_mean', 'GHI_lag_30min']
+  FEATURES_10 = ['T_Faiman', 'T_ambient_mean', 'Wind_speed_mean', 'GHI_lag_30min', 'POA_diff', 'GHI_diff', 'Hour_sin', 'Hour_cos', 'DoY_sin', 'DoY_cos']
+
+TASK 2: TEMPORAL SPLIT (5 seeds)
+----------------------------------------------------------------------
+  4f shapes: train=[49481, 4], test=[43096, 4], NaN=0
+  4f results (5 seeds):
+    seed 42: MAE=1.307
+    seed 123: MAE=1.383
+    seed 456: MAE=1.349
+    seed 789: MAE=1.324
+    seed 1024: MAE=1.313
+  4f MEAN: MAE=1.335 +/- 0.028, RMSE=1.769, R2=0.9847
+  4f QUANTIZATION:
+    Dynamic: MAE=1.308, Size=5.7KB, Inf=0.001ms
+    INT8:    MAE=1.287, Size=7.4KB, Inf=0.002ms
+    INT8 degradation: -0.020 C
+
+  10f shapes: train=[49481, 10], test=[43096, 10], NaN=0
+  10f results (5 seeds):
+    seed 42: MAE=1.380
+    seed 123: MAE=1.404
+    seed 456: MAE=1.383
+    seed 789: MAE=1.384
+    seed 1024: MAE=1.369
+  10f MEAN: MAE=1.384 +/- 0.011, RMSE=1.806, R2=0.9841
+  10f QUANTIZATION:
+    Dynamic: MAE=1.380, Size=7.2KB, Inf=0.001ms
+    INT8:    MAE=1.426, Size=7.8KB, Inf=0.001ms
+    INT8 degradation: 0.046 C
+
+TASK 4: CROSS-STATION (WS1+2+3 -> WS4-2023)
+----------------------------------------------------------------------
+  4f cross-station: train_n=256423, test_n=39977
+  4f cross MEAN: MAE=1.734 +/- 0.046
+
+  10f cross-station: train_n=256423, test_n=39977
+  10f cross MEAN: MAE=1.620 +/- 0.007
+
+TASK 5: FINAL COMPARISON TABLE
+======================================================================
+Decision criteria:
+  1. Accuracy: is 4f comparable to 10f? (within noise)
+  2. Model size: 4f should be significantly smaller
+  3. Cross-station: does 4f maintain generalization?
+  4. Simplicity: 4f = physics + thermal lag = cleaner narrative
